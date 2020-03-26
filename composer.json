@@ -1,0 +1,39 @@
+{
+  "name": "gebi84/contao-templatehint-bundle",
+  "description": "Contao Module show visually info over loaded templates in frontend and/or backend",
+  "type": "project",
+  "keywords": [
+    "contao",
+    "template",
+    "templatehint"
+  ],
+  "license": "LGPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Gebhard Nigsch",
+      "homepage": "https://gebi84.io",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/gebi84/contao-templatehint-bundle/issues",
+    "source": "https://github.com/gebi84/contao-templatehint-bundle"
+  },
+  "require": {
+    "php": "^7.1"
+  },
+  "conflict": {
+    "contao/manager-plugin": "<2.0 || >=3.0"
+  },
+  "require-dev": {
+    "contao/manager-plugin": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Gebi84\\TemplathintBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Gebi84\\TemplatehintBundle\\ContaoManager\\Plugin"
+  }
+}
