@@ -3,6 +3,7 @@
 namespace Gebi84\TemplatehintBundle\Helper;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class Helper
 {
@@ -11,9 +12,17 @@ class Helper
      */
     private $session;
 
-    public function __construct(SessionInterface $session)
-    {
+    /**
+     * @var KernelInterface
+     */
+    private $kernel;
+
+    public function __construct(
+        SessionInterface $session,
+        KernelInterface $kernel
+    ) {
         $this->session = $session;
+        $this->kernel = $kernel;
     }
 
     public function isTemplateHintActive(): bool
@@ -26,6 +35,12 @@ class Helper
 
         if (null === $session->get('backendTemplateHints')) {
             $session->set('backendTemplateHints', false);
+        }
+
+        if (!$this->kernel->isDebug()) {
+            $session->set('frontendTemplateHints', false);
+            $session->set('backendTemplateHints', false);
+            return false;
         }
 
         if (defined('TL_MODE') && TL_MODE === 'BE') {

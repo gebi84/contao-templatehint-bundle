@@ -10,6 +10,7 @@ services:
     Gebi84\TemplatehintBundle\Helper\Helper:
         arguments:
             - '@session'
+            - '@kernel'
 
     templatehint_helper:
         alias: Gebi84\TemplatehintBundle\Helper\Helper
