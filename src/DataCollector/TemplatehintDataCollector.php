@@ -20,6 +20,7 @@ class TemplatehintDataCollector implements DataCollectorInterface
     {
         $this->helper = $helper;
     }
+
     public function collect(Request $request, Response $response)
     {
     }
@@ -29,7 +30,8 @@ class TemplatehintDataCollector implements DataCollectorInterface
         return 'templatehint_data_collector';
     }
 
-    public function reset(){
+    public function reset()
+    {
         $this->data = [];
     }
 
@@ -37,5 +39,4 @@ class TemplatehintDataCollector implements DataCollectorInterface
     {
         return $this->helper->isTemplateHintActive();
     }
-
 }

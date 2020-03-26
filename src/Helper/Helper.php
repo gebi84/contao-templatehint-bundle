@@ -18,7 +18,6 @@ class Helper
 
     public function isTemplateHintActive(): bool
     {
-        return true;
         $session = $this->session;
 
         if (null === $session->get('frontendTemplateHints')) {

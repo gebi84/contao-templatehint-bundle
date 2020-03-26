@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ruleset name="coding standard">
+    <description>coding standard</description>
+    <file>src</file>
+    <rule ref="PSR2">
+        <exclude name="Generic.Files.LineLength"/>
+    </rule>
+</ruleset>

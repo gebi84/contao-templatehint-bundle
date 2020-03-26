@@ -27,7 +27,6 @@ class TemplatehintListener implements ServiceAnnotationInterface
     {
         if ($this->helper->isTemplateHintActive()) {
             $assetsDir = 'bundles/templatehint';
-            $GLOBALS['TL_CSS'][] = $assetsDir . '/css/templatehint.css';
             $head = '';
             $head .= '<link type="text/css" rel="stylesheet" href="' . $assetsDir . '/css/templatehint.css"/>';
 
@@ -78,7 +77,7 @@ class TemplatehintListener implements ServiceAnnotationInterface
     {
 
         $backtrace = debug_backtrace();
-        foreach ($backtrace as $k => $v) {
+        foreach ($backtrace as $v) {
             if ($v['class'] != get_class($this) && $v['class'] != 'Contao\FrontendTemplate') {
                 return $v['class'];
             }
