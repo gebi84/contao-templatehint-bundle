@@ -1,0 +1,25 @@
+services:
+    Gebi84\TemplatehintBundle\DataCollector\TemplatehintDataCollector:
+        arguments:
+            - '@templatehint_helper'
+        tags:
+            -   name: data_collector
+                template: '@Templatehint/collector/templatehintDataCollector.html.twig'
+                id: 'templatehint_data_collector'
+
+    Gebi84\TemplatehintBundle\Helper\Helper:
+        arguments:
+            - '@session'
+
+    templatehint_helper:
+        alias: Gebi84\TemplatehintBundle\Helper\Helper
+        public: true
+
+    Gebi84\TemplatehintBundle\EventListener\TemplatehintListener:
+        arguments:
+            - '@templatehint_helper'
+        tags:
+            - { name: contao.hook, hook: parseFrontendTemplate, method: parseFrontendTemplateHint }
+            - { name: contao.hook, hook: parseBackendTemplate, method: parseBackendTemplateHint }
+            - { name: contao.hook, hook: outputFrontendTemplate, method: addAssets }
+            - { name: contao.hook, hook: outputBackendTemplate, method: addAssets }

@@ -1,0 +1,35 @@
+.templatehint-container {
+    position: relative;
+    border: 1px dotted red;
+    margin: 6px 2px;
+    padding: 24px 2px 2px 2px;
+    zoom: 1;
+}
+
+.templatehint-div {
+    position: absolute;
+    top: 0px;
+    color: white;
+    background-color: red;
+    text-align: left;
+    display: block;
+    padding: 2px 5px;
+    min-height: 22px;
+}
+
+.templatehint-template {
+    left: 0px;
+}
+
+.templatehint-class {
+    right: 0px;
+}
+
+.templatehint-hover {
+    z-index: 998;
+}
+
+.templatehint-hover:hover {
+    z-index: 999;
+    font-weight: bold;
+}

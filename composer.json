@@ -35,5 +35,8 @@
     },
     "extra": {
         "contao-manager-plugin": "Gebi84\\TemplatehintBundle\\ContaoManager\\Plugin"
+    },
+    "replace":{
+        "guave/contao-templatehint":"self.version"
     }
 }
