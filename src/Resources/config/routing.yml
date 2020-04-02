@@ -1,0 +1,3 @@
+templatehint:
+    resource: '@Gebi84TemplatehintBundle/Controller/'
+    type: annotation

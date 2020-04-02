@@ -2,15 +2,22 @@
 
 {% block toolbar %}
     {% set icon %}
-        {{ include('@ContaoCore/Collector/contao.svg') }}
-        <span class="sf-toolbar-value">Hints</span>
-        <span class="sf-toolbar-label">
-        {% if collector.isTemplateHintActive %}
-            <a style="color: green;" href="">on</a>
-        {% else %}
-            <a href="">off</a>
+        {% set linkname = 'template_hint_on' %}
+        {% if collector.isTemplateHintEnabled %}
+            {% set linkname = 'template_hint_off' %}
         {% endif %}
-        </span>
+        <a target="_blank" href="{{ path(linkname, {scope: collector.getScope}) }}">
+            {{ include('@WebProfiler/Icon/twig.svg') }}
+            <span class="sf-toolbar-value">Hints</span>
+            {% if collector.isTemplateHintEnabled %}
+            <span style="color: green;" class="sf-toolbar-label">
+                on
+            {% else %}
+            <span class="sf-toolbar-label">
+                off
+            {% endif %}
+            </span>
+        </a>
     {% endset %}
 
     {# the 'link' value set to 'false' means that this panel doesn't

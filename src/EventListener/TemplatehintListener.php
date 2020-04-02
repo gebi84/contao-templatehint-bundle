@@ -4,19 +4,19 @@ namespace Gebi84\TemplatehintBundle\EventListener;
 
 use Contao\Controller;
 use Contao\CoreBundle\ServiceAnnotation\Hook;
-use Gebi84\TemplatehintBundle\Helper\Helper;
+use Gebi84\TemplatehintBundle\Helper\Templatehint;
 use Terminal42\ServiceAnnotationBundle\ServiceAnnotationInterface;
 
 class TemplatehintListener implements ServiceAnnotationInterface
 {
     /**
-     * @var Helper
+     * @var Templatehint
      */
-    private $helper;
+    private $templatehint;
 
-    public function __construct(Helper $helper)
+    public function __construct(Templatehint $templatehint)
     {
-        $this->helper = $helper;
+        $this->templatehint = $templatehint;
     }
 
     /**
@@ -25,7 +25,7 @@ class TemplatehintListener implements ServiceAnnotationInterface
      */
     public function addAssets(string $buffer, string $template)
     {
-        if ($this->helper->isTemplateHintActive()) {
+        if ($this->templatehint->isTemplateHintEnabled()) {
             $assetsDir = 'bundles/templatehint';
             $head = '';
             $head .= '<link type="text/css" rel="stylesheet" href="' . $assetsDir . '/css/templatehint.css"/>';
@@ -46,7 +46,7 @@ class TemplatehintListener implements ServiceAnnotationInterface
 
     protected function parseTempateHint($buffer, $template): string
     {
-        if ($this->helper->isTemplateHintActive()) {
+        if ($this->templatehint->isTemplateHintEnabled()) {
             $return = '';
             $return .= '<div class="templatehint-container">';
             $return .= '<div class="templatehint-div templatehint-template templatehint-hover">' . $this->getTemplate($template) . '</div>';
@@ -62,6 +62,15 @@ class TemplatehintListener implements ServiceAnnotationInterface
 
     protected function getTemplate(string $template): string
     {
+        if (!$this->isTwigTemplate()) {
+            $templateString = Controller::getTemplate($template);
+        } else {
+            $twig = \ContaoTwig::getInstance();
+            $loader = $twig->getLoaderFilesystem();
+            $template = $template . '.html5.twig';
+            $templateString = $loader->getCacheKey($template);
+        }
+
         $templateString = str_replace(TL_ROOT, '', Controller::getTemplate($template));
 
         if (strstr($templateString, '/system/modules/core/') !== false) {
@@ -73,13 +82,36 @@ class TemplatehintListener implements ServiceAnnotationInterface
         return $icon . ' ' . $templateString;
     }
 
+    protected function isTwigTemplate(): bool
+    {
+        $backtrace = debug_backtrace();
+
+        $isTwig = false;
+        foreach ($backtrace as $v) {
+            if ('Twig' === substr($v['class'], 0, 4)) {
+                $isTwig = true;
+                break;
+            }
+        }
+
+        return $isTwig;
+    }
+
     protected function getCalledClass(): string
     {
-
         $backtrace = debug_backtrace();
-        foreach ($backtrace as $v) {
-            if ($v['class'] != get_class($this) && $v['class'] != 'Contao\FrontendTemplate') {
-                return $v['class'];
+        if (!$this->isTwigTemplate()) {
+            foreach ($backtrace as $v) {
+                if ($v['class'] != get_class($this) && $v['class'] != 'Contao\FrontendTemplate') {
+                    return $v['class'];
+                }
+            }
+        } else {
+            foreach ($backtrace as $v) {
+                $class = get_class($v['object']);
+                if (substr($class, 0, 4) != 'Twig' && $v['class'] != get_class($this)) {
+                    return $class;
+                }
             }
         }
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gebi84\TemplatehintBundle\DataCollector;
 
-use Gebi84\TemplatehintBundle\Helper\Helper;
+use Gebi84\TemplatehintBundle\Helper\Templatehint;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
@@ -12,13 +12,13 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 class TemplatehintDataCollector implements DataCollectorInterface
 {
     /**
-     * @var Helper
+     * @var Templatehint
      */
-    private $helper;
+    private $templatehint;
 
-    public function __construct(Helper $helper)
+    public function __construct(Templatehint $templatehint)
     {
-        $this->helper = $helper;
+        $this->templatehint = $templatehint;
     }
 
     public function collect(Request $request, Response $response)
@@ -35,8 +35,13 @@ class TemplatehintDataCollector implements DataCollectorInterface
         $this->data = [];
     }
 
-    public function isTemplateHintActive(): bool
+    public function isTemplateHintEnabled(): bool
     {
-        return $this->helper->isTemplateHintActive();
+        return $this->templatehint->isTemplateHintEnabled();
+    }
+
+    public function getScope(): string
+    {
+        return $this->templatehint->getScope();
     }
 }
