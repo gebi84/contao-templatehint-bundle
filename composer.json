@@ -1,7 +1,7 @@
 {
     "name": "gebi84/contao-templatehint-bundle",
     "description": "Contao Module show visually info over loaded templates in frontend and/or backend",
-    "type": "project",
+    "type": "contao-bundle",
     "keywords": [
         "contao",
         "template",
