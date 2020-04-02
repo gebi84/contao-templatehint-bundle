@@ -1,12 +1,14 @@
 {% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
 {% block toolbar %}
+    {{ include('@Gebi84Templatehint/collector/sf-toolbar_templathint_js.html.twig') }}
+
     {% set icon %}
         {% set linkname = 'template_hint_on' %}
         {% if collector.isTemplateHintEnabled %}
             {% set linkname = 'template_hint_off' %}
         {% endif %}
-        <a target="_blank" href="{{ path(linkname, {scope: collector.getScope}) }}">
+        <a style="cursor: pointer;" class="sf-toolbar-block" href="javascript:void(0);" onclick="templatehint.ajax('{{ path(linkname, {scope: collector.getScope}) }}')">
             {{ include('@WebProfiler/Icon/twig.svg') }}
             <span class="sf-toolbar-value">Hints</span>
             {% if collector.isTemplateHintEnabled %}

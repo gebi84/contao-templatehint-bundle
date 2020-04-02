@@ -1,0 +1,17 @@
+<script>
+    (function (_window) {
+        function templatehintAjax(link) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', link);
+            xhr.send(null);
+
+            xhr.onreadystatechange = function () {
+                _window.location.reload();
+            }
+        }
+
+        _window.templatehint = {
+            ajax: templatehintAjax
+        }
+    })(window);
+</script>

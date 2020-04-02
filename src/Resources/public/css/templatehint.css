@@ -17,6 +17,10 @@
     min-height: 22px;
 }
 
+a.templatehintlinks {
+    color: white;
+}
+
 .templatehint-template {
     left: 0px;
 }

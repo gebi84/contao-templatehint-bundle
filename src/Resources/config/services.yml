@@ -20,9 +20,11 @@ services:
     Gebi84\TemplatehintBundle\EventListener\TemplatehintListener:
         arguments:
             - '@templatehint_helper'
+            - '@debug.file_link_formatter'
         tags:
             - { name: contao.hook, hook: parseFrontendTemplate, method: parseFrontendTemplateHint }
             - { name: contao.hook, hook: parseBackendTemplate, method: parseBackendTemplateHint }
+            - { name: contao.hook, hook: parseWidget, method: parseWidghetHint }
             - { name: contao.hook, hook: outputFrontendTemplate, method: addAssets }
             - { name: contao.hook, hook: outputBackendTemplate, method: addAssets }
 
