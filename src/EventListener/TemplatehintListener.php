@@ -36,9 +36,8 @@ class TemplatehintListener implements ServiceAnnotationInterface
     public function addAssets(string $buffer, string $template)
     {
         if ($this->templatehint->isTemplateHintEnabled()) {
-            $assetsDir = 'bundles/templatehint';
-            $head = '';
-            $head .= '<link type="text/css" rel="stylesheet" href="' . $assetsDir . '/css/templatehint.css"/>';
+            $assetsDir = 'bundles/contao-templatehint-bundle';
+            $head = '<link type="text/css" rel="stylesheet" href="' . $assetsDir . '/css/templatehint.css"/>';
 
             return str_replace('</head>', $head . '</head>', $buffer);
         }
