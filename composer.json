@@ -24,6 +24,7 @@
         "contao/core-bundle": "^4.9"
     },
     "conflict": {
+        "contao/core": "*",
         "contao/manager-plugin": "<2.0 || >=3.0"
     },
     "require-dev": {
