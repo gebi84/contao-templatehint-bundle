@@ -28,7 +28,7 @@
         "contao/manager-plugin": "<2.0 || >=3.0"
     },
     "require-dev": {
-        "contao/manager-plugin": "^2.1",
+        "contao/manager-plugin": "^2.0",
         "squizlabs/php_codesniffer": "^3.2",
         "phpmd/phpmd": "^2.8"
     },
