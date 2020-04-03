@@ -20,7 +20,8 @@
         "source": "https://github.com/gebi84/contao-templatehint-bundle"
     },
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "contao/core-bundle": "^4.9"
     },
     "conflict": {
         "contao/manager-plugin": "<2.0 || >=3.0"
