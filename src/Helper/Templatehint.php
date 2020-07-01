@@ -72,6 +72,10 @@ class Templatehint
      */
     public function getScope(): string
     {
+        if (!$this->request instanceof Request) {
+            return self::SCOPE_FRONTEND;
+        }
+
         if (self::SCOPE_BACKEND === $this->request->attributes->get('_scope')) {
             return self::SCOPE_BACKEND;
         }
